@@ -1,4 +1,4 @@
-import { createGlobalTheme } from '@vanilla-extract/css';
+import { createGlobalTheme, createTheme } from '@vanilla-extract/css';
 import { modularScale } from 'polished';
 
 const createScale = (ratio: number, base: number) => (steps: number) =>
@@ -9,7 +9,7 @@ const fontSizeScale = createScale(1.3, 16);
 const lineHeightScale = createScale(1.25, 24);
 const borderRadiusScale = createScale(1.5, 4);
 
-export const vars = createGlobalTheme(':root', {
+export const vars = createGlobalTheme(':root,.dig-Theme--dark', {
     space: {
         '250': spaceScale(1),
         '500': spaceScale(2),
@@ -24,9 +24,9 @@ export const vars = createGlobalTheme(':root', {
         '5000': spaceScale(11),
     },
     color: {
-        core10: '#F7F3F6',
-        core20: '#E6D3E4',
-        core30: '#AF78B4',
+        core10: 'var(--color-1)',
+        core20: 'var(--color-2)',
+        core30: 'var(--color-3)',
         core40: '#A05EA6',
         core50: '#934398',
         core60: '#7F187F',
