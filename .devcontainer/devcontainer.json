@@ -54,25 +54,21 @@
 	"extensions": [
 		"humao.rest-client",
 		"github.vscode-pull-request-github",
-
 		"visualstudioexptteam.vscodeintellicode",
 		"visualstudiotxptteam.vscodeintellicode-completions",
-
 		"ms-azuretools.vscode-docker",
-
 		"dbaeumer.vscode-eslint",
 		"christian-kohler.npm-intellisense",
 		"eg2.vscode-npm-script",
-		
 		"ritwickdey.liveserver",
 		"ritwickdey.live-sass",
-
 		"ms-vscode.wordcount",
 		"editorconfig.editorconfig",
 		"streetsidesoftware.code-spell-checker",
 		"redhat.fabric8-analytics",
 		"redhat.vscode-yaml",
-		"bierner.github-markdown-preview"
+		"bierner.github-markdown-preview",
+		"GitHub.copilot"
 	],
 
 	// Use 'postCreateCommand' to run commands after the container is created.

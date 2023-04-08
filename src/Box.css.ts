@@ -1,5 +1,5 @@
 import { createRainbowSprinkles, defineProperties } from "rainbow-sprinkles";
-import { vars } from "./vars.css";
+import {space, shape, color} from "./theme/vars.css";
 
 const responsiveProperties = defineProperties({
     conditions: {
@@ -13,39 +13,35 @@ const responsiveProperties = defineProperties({
         flexDirection: true,
         alignItems: true,
         justifyContent: true,
-        gap: vars.space,
-        padding: vars.space,
-        paddingLeft: vars.space,
-        paddingRight: vars.space,
-        paddingTop: vars.space,
-        paddingBottom: vars.space,
+        gap: space,
+        padding: space,
+        paddingLeft: space,
+        paddingRight: space,
+        paddingTop: space,
+        paddingBottom: space,
         width: true,
         height: true,
-        borderRadius: vars.borderRadius,
-        fontFamily: vars.fontFamily,
-        fontSize: vars.fontSize,
-        lineHeight: vars.lineHeight,
+        borderRadius: shape,
         textAlign: true,
         zIndex: true,
         position: true,
-        top: vars.space,
-        left: vars.space,
-        right: vars.space,
-        bottom: vars.space,
+        top: true,
+        left: true,
+        right: true,
+        bottom: true,
         verticalAlign: true,
-        margin: vars.space,
-        marginBottom: vars.space,
-        marginLeft: vars.space,
-        marginRight: vars.space,
-        marginTop: vars.space,
+        margin: space,
+        marginBottom: space,
+        marginLeft: space,
+        marginRight: space,
+        marginTop: space,
         gridTemplateColumns: true
     },
     staticProperties: {
-        display: ["block", "flex", "inline-block", "inline-flex"],
+        display: ["block", "flex", "inline-block", "inline-flex", "contents"],
         border: {
-            "1x": "1px",
-            "2x": "2px",
-            "3x": "3px"
+            "thin": "1px",
+            "thick": "2px",
         }
     },
     shorthands: {
@@ -59,7 +55,6 @@ const responsiveProperties = defineProperties({
         px: ["paddingLeft", "paddingRight"],
         py: ["paddingTop", "paddingBottom"],
         placeItems: ["alignItems", "justifyContent"],
-        typeSize: ["fontSize", "lineHeight"],
         m: ["margin"],
         mr: ["marginRight"],
         ml: ["marginLeft"],
@@ -73,24 +68,6 @@ const responsiveProperties = defineProperties({
     }
 });
 
-const interactiveProperties = defineProperties({
-    conditions: {
-        base: {},
-        hover: { selector: "&:hover" },
-        active: { selector: "&:active" }
-    },
-    defaultCondition: "base",
-    dynamicProperties: {
-        backgroundColor: vars.color,
-        transform: true,
-        transition: true,
-        animation: true
-    },
-    shorthands: {
-        bg: ["backgroundColor"]
-    }
-});
-
 const colorProperties = defineProperties({
     conditions: {
         lightMode: {},
@@ -98,14 +75,14 @@ const colorProperties = defineProperties({
     },
     defaultCondition: "lightMode",
     dynamicProperties: {
-        color: vars.color
+        color: color,
+        backgroundColor: color,
     },
     shorthands: {}
 });
 
 export const rainbowSprinkles = createRainbowSprinkles(
     responsiveProperties,
-    interactiveProperties,
     colorProperties
 );
 

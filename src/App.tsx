@@ -1,4 +1,8 @@
 import { Box } from "./Box"
+import {ThemeProvider} from "./ThemeProvider"
 export const App = () => {
-    return <Box display="flex" color="$core10" padding={{ "small": "$1000" }}>Hello</Box>;
+    return <ThemeProvider>
+        <Box pl='$xsmall' borderRadius={'$action-base'} color={'$text-base'} backgroundColor={'$on-background-base'}>Hello</Box>
+        <Box color={{lightMode: 'pink', darkMode: 'purple'}}>Hello</Box>
+    </ThemeProvider>;
 };
