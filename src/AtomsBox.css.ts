@@ -1,50 +1,41 @@
-import { createRainbowSprinkles, defineProperties } from "rainbow-sprinkles";
+import { defineProperties, createSprinkles } from "@vanilla-extract/sprinkles";
 import { space, shape, color } from "./theme/vars.css";
 
-const responsiveProperties = defineProperties({
+const layoutStyles = defineProperties({
   conditions: {
     small: {},
     medium: { "@media": "screen and (min-width: 768px)" },
     large: { "@media": "screen and (min-width: 1024px)" },
   },
   defaultCondition: "small",
-  dynamicProperties: {
-    color: color,
-    backgroundColor: color,
-    display: true,
-    flexDirection: true,
-    alignItems: true,
-    justifyContent: true,
-    gap: space,
-    padding: space,
-    paddingLeft: space,
-    paddingRight: space,
+  properties: {
+    display: ["none", "flex", "block", "inline", "contents"],
+    flexDirection: ["row", "column"],
+    justifyContent: [
+      "stretch",
+      "flex-start",
+      "center",
+      "flex-end",
+      "space-around",
+      "space-between",
+    ],
+    alignItems: ["stretch", "flex-start", "center", "flex-end"],
     paddingTop: space,
     paddingBottom: space,
-    width: true,
-    height: true,
-    borderRadius: shape,
-    textAlign: true,
-    zIndex: true,
-    position: true,
-    top: true,
-    left: true,
-    right: true,
-    bottom: true,
-    verticalAlign: true,
+    paddingLeft: space,
+    paddingRight: space,
+    padding: space,
     margin: space,
+    marginTop: space,
     marginBottom: space,
     marginLeft: space,
     marginRight: space,
-    marginTop: space,
-    gridTemplateColumns: true,
-  },
-  staticProperties: {
-    display: ["block", "flex", "inline-block", "inline-flex"],
+    borderRadius: shape,
     border: {
       thin: "1px",
       thick: "2px",
     },
+    // etc.
   },
   shorthands: {
     p: ["padding"],
@@ -66,10 +57,17 @@ const responsiveProperties = defineProperties({
     marginY: ["marginTop", "marginBottom"],
     mx: ["marginLeft", "marginRight"],
     my: ["marginTop", "marginBottom"],
-    size: ["height", "width"],
   },
 });
 
-export const rainbowSprinkles = createRainbowSprinkles(responsiveProperties);
+const colorStyles = defineProperties({
+  properties: {
+    color: color,
+    backgroundColor: color,
+    borderColor: color,
+  },
+});
 
-export type Sprinkles = Parameters<typeof rainbowSprinkles>[0];
+export const atoms = createSprinkles(layoutStyles, colorStyles);
+// It's a good idea to export the Sprinkles type too
+export type Atoms = Parameters<typeof atoms>[0];
