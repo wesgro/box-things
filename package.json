@@ -1,6 +1,26 @@
 {
   "name": "box-stuff",
-  "version": "0.0.0",
+  "version": "0.0.3",
+  "main": "dist/box-thing.js",
+  "module": "dist/box-thing.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/box-thing.mjs",
+      "require": "./dist/box-thing.js"
+    },
+    "./dist/style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
+    }
+  },
+  "sideEffects": [
+    "dist/style.css"
+  ],
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@react-hookz/web": "^23.0.0",
     "@vanilla-extract/dynamic": "^2.0.3",
@@ -8,8 +28,7 @@
     "clsx": "^1.2.1",
     "rainbow-sprinkles": "^0.16.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "web-vitals": "^3.0.3"
+    "react-dom": "^18.2.0"
   },
   "eslintConfig": {
     "extends": [
@@ -18,9 +37,10 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite --config vite.build.config.ts build && tsc -p tsconfig.build.json --emitDeclarationOnly ",
     "lib": "tsx ./bundle.ts",
-    "lib:watch": "tsx ./watch.ts"
+    "lib:watch": "tsx ./watch.ts",
+    "prepack": "npm run build"
   },
   "devDependencies": {
     "@types/node": "^18.15.11",
@@ -30,7 +50,6 @@
     "@vanilla-extract/esbuild-plugin": "2.2.2",
     "@vanilla-extract/vite-plugin": "^3.8.0",
     "@vitejs/plugin-react": "^3.1.0",
-    "bun-types": "^0.5.8",
     "esbuild": "0.17.15",
     "polished": "^4.2.2",
     "react-refresh": "0.10.0",

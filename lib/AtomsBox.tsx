@@ -57,9 +57,15 @@ type PolymorphicComponent<
 ) => React.ReactElement | null;
 //
 
+// export type OverrideTokens<T> = {
+//   [K in keyof T as K extends keyof React.CSSProperties ? `__${K}` : number]:
+//     | Extract<T[K], string | number>
+//     | (string & {});
+// };
+
 export type OverrideTokens<T> = {
   [K in keyof T as K extends keyof React.CSSProperties ? `__${K}` : number]:
-    | Exclude<T[K], object>
+    | Extract<T[K], string | number>
     | (string & {});
 };
 
@@ -107,4 +113,4 @@ export const Box: <TType extends React.ElementType = typeof defaultElement>(
   }
 );
 
-(Box as any).displayName = "DessertBox";
+(Box as any).displayName = "BoxThing";

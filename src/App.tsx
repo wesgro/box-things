@@ -1,7 +1,7 @@
 import * as React from "react";
-import { Box } from "./Box";
-import { Box as AtomsBox } from "./AtomsBox";
-import { ThemeProvider } from "./ThemeProvider";
+import { Box } from "../lib/Box";
+import { Box as AtomsBox } from "../lib/AtomsBox";
+import { ThemeProvider } from "../lib/ThemeProvider";
 export const App = () => {
   const ref = React.useRef<HTMLAnchorElement>(null);
   return (
