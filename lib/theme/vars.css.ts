@@ -23,7 +23,7 @@ export const space = createGlobalThemeContract(
 createGlobalTheme(":root", space, {
   none: "0",
   narrow: spaceScale(3),
-  wide: spaceScale(5),
+  wide: spaceScale(9),
 });
 
 export const color = createGlobalThemeContract(

@@ -7,7 +7,7 @@ import {
   type RequiredConditionalValue,
 } from "@vanilla-extract/sprinkles";
 import { space, shape, color, utility, boxShadow } from "./theme/vars.css";
-
+export const breakpoints = ["small", "medium", "large"] as const;
 const layoutStyles = defineProperties({
   conditions: {
     small: {},
