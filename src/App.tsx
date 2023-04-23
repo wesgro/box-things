@@ -1,35 +1,42 @@
 import * as React from "react";
-import { Box } from "../lib/Box";
+// import { Box } from "../lib/Box";
 import { Box as AtomsBox } from "../lib/AtomsBox";
+import { Stack } from "../lib/Stack";
 import { ThemeProvider } from "../lib/ThemeProvider";
 export const App = () => {
   const ref = React.useRef<HTMLAnchorElement>(null);
   return (
     <ThemeProvider>
-      {/* <Box
-        pl="$xsmall"
-        borderRadius={"$action-base"}
-        color={"$text-base"}
-        backgroundColor={"$on-background-base"}
-      >
-        Hello
-      </Box>
-      <Box
-        backgroundColor={"$background-base"}
-        padding={{ small: "23px" }}
-        color={"$text-base"}
-      >
-        <div>padding</div>
-      </Box> */}
       <AtomsBox
-        as="a"
+        as="main"
         ref={ref}
-        display="flex"
-        flexDirection={{ small: "column", medium: "row" }}
-        backgroundColor="background-base"
-        href="https://google.com"
+        height="100%"
+        backgroundColor={"background-base"}
+        color={"text-base"}
+        padding="wide"
       >
-        Hey
+        <Stack space="large">
+          <AtomsBox
+            boxShadow={{ focusVisible: "focus-ring" }}
+            padding={"wide"}
+            as="button"
+          >
+            Focus me
+          </AtomsBox>
+          <AtomsBox
+            boxShadow={{ hasFocusVisible: "focus-ring" }}
+            borderRadius="action-base"
+          >
+            <AtomsBox
+              color="text-base"
+              as="a"
+              href="https://google.com"
+              outlineWidth="none"
+            >
+              Link
+            </AtomsBox>
+          </AtomsBox>
+        </Stack>
       </AtomsBox>
     </ThemeProvider>
   );
