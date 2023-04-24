@@ -25,8 +25,15 @@ const spaceMap: Record<StackSpace, string> = {
 function isStackSpace(value: string): value is StackSpace {
   return value in spaceMap;
 }
-
-const resolveValue = (space: StackProps["space"]): [string, string, string] => {
+type Writeable<T> = { -readonly [P in keyof T]: T[P] };
+type StringTupleFromArrayValues<T extends string[]> = {
+  [P in keyof T]: T[P] extends string ? string : never;
+};
+type Breakpoints = typeof breakpoints;
+type ResolveValueReturnType = StringTupleFromArrayValues<
+  Writeable<Breakpoints>
+>;
+const resolveValue = (space: StackProps["space"]): ResolveValueReturnType => {
   if (typeof space === "string") {
     return isStackSpace(space)
       ? [spaceMap[space], spaceMap[space], spaceMap[space]]
