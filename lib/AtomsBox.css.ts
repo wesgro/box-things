@@ -87,6 +87,7 @@ const pseudoStyles = defineProperties({
       thin: "1px",
       thick: "3px",
     },
+    outlineStyle: ["solid"],
     outlineColor: color,
     outlineWidth: {
       none: "0",

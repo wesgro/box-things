@@ -57,17 +57,23 @@ type PolymorphicComponent<
 ) => React.ReactElement | null;
 //
 
-// export type OverrideTokens<T> = {
-//   [K in keyof T as K extends keyof React.CSSProperties ? `__${K}` : number]:
-//     | Extract<T[K], string | number>
-//     | (string & {});
-// };
-
 export type OverrideTokens<T> = {
   [K in keyof T as K extends keyof React.CSSProperties ? `__${K}` : number]:
     | Extract<T[K], string | number>
     | (string & {});
 };
+
+type IgnorantOverrideTokens = {
+  [K in keyof React.CSSProperties as K extends string
+    ? `__${K}`
+    : never]: React.CSSProperties[K];
+};
+
+// export type OverrideTokens<T> = {
+//   [K in keyof T as K extends keyof React.CSSProperties ? `__${K}` : number]:
+//     | Extract<T[K], string | number>
+//     | (string & {});
+// };
 
 // type OverrideTokens<T> = {
 //   [K in keyof T as K extends string ? `__${K}` : number]:
@@ -75,13 +81,13 @@ export type OverrideTokens<T> = {
 //     | {};
 // };
 
-type Tokens<AtomsFn extends AtomsFnBase> = Parameters<AtomsFn>[0];
+type Tokens<AtomsFn extends AtomsFnBase> = { sx?: Parameters<AtomsFn>[0] };
 type BoxProps<
   AtomsFn extends AtomsFnBase,
   TType extends React.ElementType
 > = PolymorphicComponentProps<
   TType,
-  Tokens<AtomsFn> & OverrideTokens<Tokens<AtomsFn>>
+  Tokens<AtomsFn> & Tokens<AtomsFn> & IgnorantOverrideTokens
 >;
 
 const defaultElement = "div";
@@ -91,18 +97,15 @@ export const Box: <TType extends React.ElementType = typeof defaultElement>(
   props: BoxProps<AtomsFn, TType>
 ) => null | ReactElement<BoxProps<AtomsFn, TType>> = forwardRef(
   <TType extends React.ElementType = typeof defaultElement>(
-    { className, style, as, ...props }: BoxProps<AtomsFn, TType>,
+    { className, style, as, sx, ...props }: BoxProps<AtomsFn, TType>,
     ref: ForwardedRef<PolymorphicComponent<BoxProps<AtomsFn, TType>, TType>>
   ) => {
     const Element = as || defaultElement;
     const { atomProps, styleProps, otherProps } = extractAtomsFromProps(
-      props,
+      { ...props, ...sx },
       atoms
     );
-    const styleAttr = React.useMemo(
-      () => ({ ...style, ...styleProps }),
-      [style, styleProps]
-    );
+    const styleAttr = { ...style, ...styleProps };
 
     return createElement(Element, {
       ref,
