@@ -6,7 +6,7 @@ import React, {
 } from "react";
 import clsx from "clsx";
 import { atoms } from "./AtomsBox.css";
-
+import {useTheme} from "./useTheme"
 export interface AtomsFnBase {
   (...args: any): string;
   properties: Set<string>;
@@ -100,6 +100,7 @@ export const Box: <TType extends React.ElementType = typeof defaultElement>(
     { className, style, as, sx, ...props }: BoxProps<AtomsFn, TType>,
     ref: ForwardedRef<PolymorphicComponent<BoxProps<AtomsFn, TType>, TType>>
   ) => {
+    const { className: themeClassName } = useTheme();
     const Element = as || defaultElement;
     const { atomProps, styleProps, otherProps } = extractAtomsFromProps(
       { ...props, ...sx },
@@ -111,7 +112,7 @@ export const Box: <TType extends React.ElementType = typeof defaultElement>(
       ref,
       style: styleAttr,
       ...otherProps,
-      className: clsx(className, atoms(atomProps)),
+      className: clsx(themeClassName,className, atoms(atomProps)),
     });
   }
 );

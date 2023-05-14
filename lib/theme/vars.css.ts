@@ -1,6 +1,8 @@
 import {
   createGlobalTheme,
   createGlobalThemeContract,
+  createThemeContract,
+  createTheme,
 } from "@vanilla-extract/css";
 import { brightClass, darkClass } from "./constants";
 import { modularScale } from "polished";
@@ -12,18 +14,23 @@ const spaceScale = createScale(1.4, 4);
 const prefixVar = (prefix: string) => (name: string | null) =>
   `box-thing-${prefix}-${name}`;
 
-export const space = createGlobalThemeContract(
+export const space = createThemeContract(
   {
     none: "spacing-0",
     narrow: "spacing-1",
     wide: "spacing-2",
-  },
-  prefixVar("space")
+  }
 );
-createGlobalTheme(":root", space, {
+export const spaceLoose = createTheme( space, {
+  none: "0",
+  narrow: spaceScale(5),
+  wide: spaceScale(10),
+});
+
+export const spaceDense = createTheme( space, {
   none: "0",
   narrow: spaceScale(3),
-  wide: spaceScale(9),
+  wide: spaceScale(4),
 });
 
 export const color = createGlobalThemeContract(
